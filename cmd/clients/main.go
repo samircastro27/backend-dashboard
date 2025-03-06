@@ -9,7 +9,7 @@ import (
 	"github.com/samircastro27/backend-dashboard/cmd/clients/infrastructure"
 	"github.com/samircastro27/backend-dashboard/cmd/clients/infrastructure/service"
 	"github.com/samircastro27/backend-dashboard/cmd/clients/svc"
-	redis "github.com/samircastro27/backend-dashboard/config/redis/client"
+	// redis "github.com/samircastro27/backend-dashboard/config/redis/client"
 	dpc "github.com/samircastro27/backend-dashboard/pkg/dapr"
 	"github.com/samircastro27/backend-dashboard/pkg/logger"
 )
@@ -29,11 +29,11 @@ func main() {
 	svcDependencies := &usecases.Dependencies{
 		Repositories: svc.NewRepositories(daprClient),
 	}
-	redis.InitRedis()
+	// redis.InitRedis()
 
 	svcCtx := svc.NewServiceContext()
 
-	clients := usecases.NewUsersStruc(context.Background(), svcDependencies, redis.RedisClient, daprClient)
+	clients := usecases.NewUsersStruc(context.Background(), svcDependencies, daprClient)
 
 	svcCtx = svcCtx.UsersUseCase(clients)
 

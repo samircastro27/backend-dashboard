@@ -4,7 +4,7 @@ import (
 	"context"
 
 	dapr "github.com/dapr/go-sdk/client"
-	"github.com/go-redis/redis/v8"
+	// "github.com/go-redis/redis/v8"
 	"github.com/samircastro27/backend-dashboard/cmd/clients/application/services"
 	"github.com/samircastro27/backend-dashboard/cmd/clients/domain"
 	"github.com/samircastro27/backend-dashboard/pkg/logger"
@@ -13,7 +13,7 @@ import (
 type UsersStruc struct {
 	ctx         context.Context
 	svcCtx      *Dependencies
-	redisClient *redis.Client
+	// redisClient *redis.Client
 	DaprCli     dapr.Client
 }
 
@@ -39,11 +39,11 @@ type MetricsData struct {
 	Values    [][]interface{} `json:"values"`
 }
 
-func NewUsersStruc(ctx context.Context, svcCtx *Dependencies, redisClient *redis.Client, daprCli dapr.Client) *UsersStruc {
+func NewUsersStruc(ctx context.Context, svcCtx *Dependencies, daprCli dapr.Client) *UsersStruc {
 	return &UsersStruc{
 		ctx:         ctx,
 		svcCtx:      svcCtx,
-		redisClient: redisClient,
+		// redisClient: redisClient,
 		DaprCli:     daprCli,
 	}
 }
