@@ -1,0 +1,95 @@
+# version: '3.8'
+# services:
+#   rabbitmq:
+#     image: 'rabbitmq:3-management'
+#     environment:
+#       RABBITMQ_DEFAULT_USER: 'user'
+#       RABBITMQ_DEFAULT_PASS: 'password'
+#       RABBITMQ_ERLANG_COOKIE: longenoughrandomstringfortesting1234567890
+#     ports:
+#       - '15672:15672'
+#       - '5672:5672'
+
+#   postgres:
+#     image: 'postgres:13'
+#     environment:
+#       POSTGRES_USER: user
+#       POSTGRES_PASSWORD: password
+#       POSTGRES_DB: 'sacc'
+#     ports:
+#       - '5442:5432'
+#     networks:
+#       - backend_network
+
+#   cache:
+#     image: redis:6.2-alpine
+#     restart: always
+#     ports:
+#       - '6379:6379'
+#     command: redis-server --save 20 1 --loglevel warning --requirepass password
+#     volumes:
+#       - cache:/data
+#     networks:
+#       - backend_network
+
+# networks:
+#   backend_network:  # Defino la red para que los contenedores se comuniquen
+
+# volumes:
+#   cache:
+
+
+version: '3.8'
+services:
+  rabbitmq:
+    image: 'rabbitmq:3-management'
+    environment:
+      RABBITMQ_DEFAULT_USER: 'user'
+      RABBITMQ_DEFAULT_PASS: 'password'
+      RABBITMQ_ERLANG_COOKIE: longenoughrandomstringfortesting1234567890
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    networks:
+      - backend_network
+
+  postgres:
+    image: 'postgres:13'
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: 'sacc'
+    ports:
+      - '5442:5432'
+    networks:
+      - backend_network
+
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass password
+    volumes:
+      - cache:/data
+    networks:
+      - backend_network
+
+  backend:
+    build:
+      context: .  # Usa el Dockerfile para construir tu aplicación
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres  # Asegura que `postgres` se levante antes de tu app
+    environment:
+      POSTGRES_URI: postgresql://postgres.fkbeimvcjjbapbwbkkdf:SACC*2025@aws-0-us-west-1.pooler.supabase.com:6543/postgres
+    ports:
+      - "9090:9090"
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+
+volumes:
+  cache:

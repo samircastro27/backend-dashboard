@@ -1,0 +1,20 @@
+version: 1
+common:
+  resourcesPath: ./components
+  env:
+    DEBUG: true
+  healthCheckInterval: 5s
+  healthCheckTimeout: 30s
+apps:
+
+  - appID: clients
+    appDirPath: ./cmd/clients
+    appPort: 9091
+    command: [ "go","run", "main.go" ]
+    appHealthCheckPath: /healthz
+
+  - appID: api
+    appDirPath: ./cmd/api
+    appPort: 9090
+    command: [ "go","run", "main.go" ]
+    appHealthCheckPath: /healthz

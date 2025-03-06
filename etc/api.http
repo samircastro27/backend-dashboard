@@ -1,0 +1,21 @@
+# ===================================================================
+# File for the VS Code REST Client extension
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+# Provides a quick way to test & call the API wihout needing Postman
+# ===================================================================
+
+
+@host = localhost:9090
+@user = 00000000-1111-2222-3333-abcdef123456
+# ===================================================================
+# Deletion Worker
+# ===================================================================
+
+DELETE http://{{host}}/v1/deletion-worker HTTP/1.1
+content-type: application/json
+
+{
+  "resource": "organizations",
+  "id": "00000000-1111-2222-3333-abcdef123456",
+  "data": {}
+}

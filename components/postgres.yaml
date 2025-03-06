@@ -1,0 +1,16 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: postgresdb
+spec:
+  type: bindings.postgresql
+  version: v1
+  metadata:
+    - name: connectionString
+      value: POSTGRES_URI
+    - name: timeoutInSeconds
+      value: 5
+    - name: sql
+      value: ""
+    - name: queryExecMode
+      value: "exec"
