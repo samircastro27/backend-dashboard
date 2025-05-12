@@ -9,12 +9,12 @@ apps:
 
   - appID: clients
     appDirPath: ./cmd/clients
-    appPort: 9091
+    appPort: 8090
     command: [ "go","run", "main.go" ]
     appHealthCheckPath: /healthz
 
   - appID: api
     appDirPath: ./cmd/api
-    appPort: 9091
+    appPort: 8090
     command: [ "go","run", "main.go" ]
     appHealthCheckPath: /healthz

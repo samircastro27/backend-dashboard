@@ -9,13 +9,14 @@ import (
 	"github.com/samircastro27/backend-dashboard/cmd/clients/infrastructure"
 	"github.com/samircastro27/backend-dashboard/cmd/clients/infrastructure/service"
 	"github.com/samircastro27/backend-dashboard/cmd/clients/svc"
+
 	// redis "github.com/samircastro27/backend-dashboard/config/redis/client"
 	dpc "github.com/samircastro27/backend-dashboard/pkg/dapr"
 	"github.com/samircastro27/backend-dashboard/pkg/logger"
 )
 
 func main() {
-	appPort := "9091"
+	appPort := "8090"
 	if port, ok := os.LookupEnv("APP_LOGS_PORT"); ok {
 		appPort = port
 	}
