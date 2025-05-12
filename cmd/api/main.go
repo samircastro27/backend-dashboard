@@ -18,7 +18,7 @@ import (
 )
 
 func main() {
-	appPort := "9090"
+	appPort := "9091"
 	if port, ok := os.LookupEnv("APP_API_PORT"); ok {
 		appPort = port
 	}
